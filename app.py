@@ -38,7 +38,18 @@ def publish():
 
     return jsonify(response.json())
 
-
+@app.get("/test")
+def test():
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+    response = requests.post(
+        url,
+        json={
+            "chat_id": CHANNEL,
+            "text": "🟢 Тест Schoolvision — бот работает!"
+        },
+        timeout=20
+    )
+    return response.json()
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
