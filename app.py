@@ -25,10 +25,8 @@ def publish():
     if not text:
         return jsonify({"ok": False, "error": "No text"}), 400
 
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
-
     response = requests.post(
-        url,
+        f"https://api.telegram.org/bot{TOKEN}/sendMessage",
         json={
             "chat_id": CHANNEL,
             "text": text
@@ -38,18 +36,7 @@ def publish():
 
     return jsonify(response.json())
 
-@app.get("/test")
-def test():
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
-    response = requests.post(
-        url,
-        json={
-            "chat_id": CHANNEL,
-            "text": "🟢 Тест Schoolvision — бот работает!"
-        },
-        timeout=20
-    )
-    return response.json()
+
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
